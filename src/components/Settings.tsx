@@ -16,6 +16,8 @@ interface SettingsProps {
   onAddUser: (user: User) => void;
   onDeleteUser: (id: string) => void;
   onResetData: () => void;
+  inviteCode?: string;
+  onLogout?: () => void;
 }
 
 export const Settings: React.FC<SettingsProps> = ({
@@ -31,7 +33,9 @@ export const Settings: React.FC<SettingsProps> = ({
   users,
   onAddUser,
   onDeleteUser,
-  onResetData
+  onResetData,
+  inviteCode,
+  onLogout
 }) => {
   // Budget Form
   const [budgetVal, setBudgetVal] = useState(monthlyBudget.toString());
@@ -787,8 +791,57 @@ export const Settings: React.FC<SettingsProps> = ({
         </div>
       </div>
 
+      {/* Invite Code Panel */}
+      {inviteCode && (
+        <div className="glass-panel" style={{ padding: '16px', border: '1px solid var(--color-brand)' }}>
+          <h3 style={{ fontSize: '1rem', marginBottom: '8px', color: 'var(--color-brand)' }}>
+            Código do Grupo
+          </h3>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '12px' }}>
+            Compartilhe este código com o seu parceiro(a) para sincronizar suas finanças:
+          </p>
+          <div style={{
+            background: 'rgba(0,0,0,0.3)',
+            padding: '12px',
+            borderRadius: '8px',
+            textAlign: 'center',
+            fontSize: '1.4rem',
+            fontFamily: 'var(--font-heading)',
+            fontWeight: 800,
+            letterSpacing: '2px',
+            color: 'var(--text-primary)',
+            border: '1px dashed var(--surface-border)'
+          }}>
+            {inviteCode}
+          </div>
+        </div>
+      )}
+
       {/* 6. Resets / Actions */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        {onLogout && (
+          <button 
+            onClick={onLogout} 
+            style={{ 
+              background: 'var(--surface)', 
+              border: '1px solid var(--surface-border)', 
+              color: 'var(--text-primary)', 
+              padding: '12px', 
+              borderRadius: '8px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              fontWeight: 600,
+              fontSize: '0.85rem',
+              marginBottom: '4px'
+            }}
+          >
+            Sair da Conta (Logout)
+          </button>
+        )}
+
         <button 
           onClick={onResetData} 
           style={{ 
