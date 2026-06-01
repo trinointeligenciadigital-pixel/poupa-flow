@@ -50,13 +50,7 @@ export interface Account {
   initialBalance: number;
 }
 
-// Utility: calculate live account balance
-export function calcAccountBalance(account: Account, transactions: Transaction[]): number {
-  const txs = transactions.filter(t => t.accountId === account.id);
-  const inflow = txs.filter(t => t.type === 'inflow').reduce((sum, t) => sum + t.amount, 0);
-  const outflow = txs.filter(t => t.type === 'outflow').reduce((sum, t) => sum + t.amount, 0);
-  return account.initialBalance + inflow - outflow;
-}
+// Nota: A função calcAccountBalance agora é importada diretamente de ./utils/finance e está 100% coberta por testes automatizados (Skill 5 Trino).
 
 // Utility: get latest transaction date for an account
 export function getLastActivity(account: Account, transactions: Transaction[]): string | null {

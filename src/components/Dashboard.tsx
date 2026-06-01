@@ -1,7 +1,8 @@
 import React from 'react';
 import { ArrowUpRight, ArrowDownRight, Award, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import type { Transaction, FixedExpense, Account, User } from '../App';
-import { calcAccountBalance, getLastActivity } from '../App';
+import { getLastActivity } from '../App';
+import { calcAccountBalance } from '../utils/finance';
 
 interface DashboardProps {
   transactions: Transaction[];
